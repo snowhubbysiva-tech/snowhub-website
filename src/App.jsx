@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 
 /* =========================================================
@@ -3374,7 +3374,7 @@ function Navbar({ page, setPage, setShowSearch }) {
         <a href="#about" className={page === "about" ? "active" : ""} onClick={(e) => { e.preventDefault(); setPage("about"); }}>About</a>
       </div>
 
-      <button
+     <button
   className="search-btn"
   aria-label="Search"
   onClick={() => setShowSearch(true)}
@@ -3448,6 +3448,69 @@ gr.query();
 while (gr.next()) {
     gs.info(gr.number);
 }`}</pre>
+          </div>
+        </div>
+      </section>
+            {/* =====================================================
+          PRACTICE & INTERVIEW HUB
+      ====================================================== */}
+
+      <section className="learning-tools-section">
+        <div className="learning-tools-container">
+
+          <div className="learning-tools-heading">
+            <div className="section-label">LEARN BEYOND THEORY</div>
+
+            <h2>
+              Practice. <span>Prepare.</span>
+            </h2>
+
+            <p>
+              Strengthen your ServiceNow knowledge with practice questions
+              and interview preparation.
+            </p>
+          </div>
+
+          <div className="learning-tools-grid">
+
+            <article className="learning-tool-card">
+              <div className="learning-tool-icon">🧠</div>
+
+              <div>
+                <h3>Practice ITSM</h3>
+
+                <p>
+                  Test your knowledge with practical ServiceNow
+                  questions and improve your understanding.
+                </p>
+
+                <button
+                  onClick={() => setPage("practice")}
+                >
+                  Start Practice →
+                </button>
+              </div>
+            </article>
+
+            <article className="learning-tool-card">
+              <div className="learning-tool-icon">💼</div>
+
+              <div>
+                <h3>Interview Preparation</h3>
+
+                <p>
+                  Prepare for ServiceNow interviews with questions,
+                  scenarios and practical concepts.
+                </p>
+
+                <button
+                  onClick={() => setPage("interview")}
+                >
+                  Start Interview Prep →
+                </button>
+              </div>
+            </article>
+
           </div>
         </div>
       </section>
@@ -3615,24 +3678,10 @@ function CoursesPage({ setPage }) {
    ITSM COURSE PAGE
 ========================================================= */
 
-function ITSMPage({
-  setPage,
-  completedTopics,
-  inProgressTopics,
-  onStartLesson,
-  completedPracticeTopics,
-  completedInterviewTopics,
-}) {
+function ITSMPage({ setPage }) {
   const [searchTerm, setSearchTerm] = useState("");
 
-  const completedCount = completedTopics.size;
-const progress = Math.round((completedCount / itsmTopics.length) * 100);
-
-const nextTopic =
-  itsmTopics.find(([number]) => !completedTopics.has(number)) ||
-  itsmTopics[0];
-
-const filteredTopics = itsmTopics.filter((topic) =>
+  const filteredTopics = itsmTopics.filter((topic) =>
   topic[1].toLowerCase().includes(searchTerm.toLowerCase())
 );
 
@@ -3644,18 +3693,7 @@ const filteredTopics = itsmTopics.filter((topic) =>
         <div className="itsm-icon">⚙</div>
         <div className="section-label">SERVICENOW ITSM</div>
         <h1>IT Service Management<br /><span>Learn ITSM. Build Real Skills.</span></h1>
-        <button
-  className="practice-hub-btn"
-  onClick={() => setPage("practice")}
->
-  🧠 Practice ITSM →
-</button>
-<button
-  className="interview-hub-btn"
-  onClick={() => setPage("interview")}
->
-  💼 ITSM Interview Prep →
-</button>
+      
         <p>Learn ServiceNow ITSM concepts step by step through practical examples, implementation scenarios and interview-focused learning.</p>
         <div className="itsm-meta">
           <div><strong>12</strong><span>Topics</span></div>
@@ -3689,46 +3727,6 @@ const filteredTopics = itsmTopics.filter((topic) =>
     </button>
   )}
 </div>
-       <div className="itsm-progress-card">
-  <div className="itsm-progress-top">
-    <div>
-      <div className="section-label">YOUR ITSM PROGRESS</div>
-
-      <h3>
-        {completedCount} of {itsmTopics.length} topics completed
-      </h3>
-
-      <p>
-        {progress === 100
-          ? "🎉 You completed the entire ITSM course!"
-          : `Keep learning. ${itsmTopics.length - completedCount} topics remaining.`}
-      </p>
-    </div>
-
-    <strong>{progress}%</strong>
-  </div>
-
-  <div className="itsm-progress-track">
-    <div
-      className="itsm-progress-fill"
-      style={{ width: `${progress}%` }}
-    ></div>
-  </div>
-
-  {progress < 100 ? (
-    <button
-      className="continue-learning-btn"
-      onClick={() => setPage(`lesson-${nextTopic[0]}`)}
-    >
-      Continue Learning
-      <span>→</span>
-    </button>
-  ) : (
-    <div className="course-completed-message">
-      ✓ ITSM Course Completed
-    </div>
-  )}
-</div>
 {filteredTopics.length === 0 && (
   <div className="no-search-results">
     <div className="no-search-icon">🔎</div>
@@ -3739,113 +3737,34 @@ const filteredTopics = itsmTopics.filter((topic) =>
   </div>
 )}
         <div className="itsm-topic-grid">
-          {filteredTopics.map(([number, title, description]) =>  {
-            const completed = completedTopics.has(number);
-            const inProgress =
-  inProgressTopics.has(number) && !completed;
-  const practiceTopicMap = {
-  "01": null,
-  "02": "incident",
-  "03": "problem",
-  "04": "change",
-  "05": "knowledge",
-  "06": "catalog",
-  "07": "users",
-  "08": "sla",
-  "09": "scripting",
-  "10": "scripting",
-  "11": "acl",
-  "12": "reporting",
-};
-const practiceId = practiceTopicMap[number];
-
-
-const practiceCompleted =
-  practiceId
-    ? completedPracticeTopics.has(practiceId)
-    : false;
-
-const interviewCompleted =
-  practiceId
-    ? completedInterviewTopics.has(practiceId)
-    : false;
-
-const totalCompleted =
-  Number(completed) +
-  Number(practiceCompleted) +
-  Number(interviewCompleted);
+          {filteredTopics.map(([number, title, description]) => {
+            const practiceTopicMap = {
+              "01": null,
+              "02": "incident",
+              "03": "problem",
+              "04": "change",
+              "05": "knowledge",
+              "06": "catalog",
+              "07": "users",
+              "08": "sla",
+              "09": "scripting",
+              "10": "scripting",
+              "11": "acl",
+              "12": "reporting",
+            };
+            const practiceId = practiceTopicMap[number];
 
             return (
-            <article className={`itsm-topic-card ${completed ? "topic-completed" : ""}`} key={number}>
+            <article className="itsm-topic-card" key={number}>
               <div className="topic-number">{number}</div>
               <div className="topic-content">
                 <h3>{title}</h3>
                 <p>{description}</p>
-                {completed ? (
-  <div className="topic-status completed">
-    ✓ Completed
-  </div>
-) : inProgress ? (
-  <div className="topic-status in-progress">
-    ● In Progress
-  </div>
-) : (
-  <div className="topic-status not-started">
-    ○ Not Started
-  </div>
-)}
-<div className="topic-progress-mini">
-
-  <span className={completed ? "done" : ""}>
-    {completed ? "✓" : "○"} Lesson
-  </span>
-
-  {practiceId && (
-    <span className={practiceCompleted ? "done" : ""}>
-      {practiceCompleted ? "✓" : "○"} Practice
-    </span>
-  )}
-
-  {practiceId && (
-    <span className={interviewCompleted ? "done" : ""}>
-      {interviewCompleted ? "✓" : "○"} Interview
-    </span>
-  )}
-
-</div>
-                <div className="topic-actions">
-
-  <button
-    onClick={() => {
-      onStartLesson(number);
-      setPage(`lesson-${number}`);
-    }}
-  >
-    {completed
-      ? "Review Topic →"
-      : inProgress
-      ? "Continue Learning →"
-      : "Learn Topic →"}
+  
+              <div className="topic-actions">
+  <button onClick={() => setPage(`lesson-${number}`)}>
+    Learn Topic →
   </button>
-
-  {practiceId && (
-    <button
-      className="topic-practice-btn"
-      onClick={() => setPage(`practice-${practiceId}`)}
-    >
-      🧠 Practice
-    </button>
-  )}
-
-  {practiceId && (
-    <button
-      className="topic-interview-btn"
-      onClick={() => setPage(`interview-${practiceId}`)}
-    >
-      💼 Interview
-    </button>
-  )}
-
 </div>
               </div>
             </article>
@@ -5899,11 +5818,7 @@ function InterviewHub({ setPage }) {
     </main>
   );
 }
-function InterviewPrep({
-  setPage,
-  topic,
-  onCompleteInterview,
-}) {
+function InterviewPrep({ setPage, topic }) {
   const interview = interviewQuestions[topic];
 
   if (!interview) {
@@ -5923,7 +5838,6 @@ const handleNext = () => {
   if (currentQuestion < questions.length - 1) {
     setCurrentQuestion((previous) => previous + 1);
   } else {
-    onCompleteInterview(topic);
     setCurrentQuestion(0);
   }
 };
@@ -6016,11 +5930,7 @@ const handleNext = () => {
     </main>
   );
 }
-function PracticeQuiz({
-  setPage,
-  topic,
-  onCompletePractice,
-}) {
+function PracticeQuiz({ setPage, topic }) {
   const practice = practiceQuestions[topic];
 
   const questions = practice.questions;
@@ -6055,7 +5965,6 @@ function PracticeQuiz({
       setSubmitted(false);
     } else {
       setFinished(true);
-      onCompletePractice(topic);
     }
   };
 
@@ -6322,20 +6231,8 @@ function PracticeQuiz({
    LESSON PAGE
 ========================================================= */
 
-function LessonPage({
-  setPage,
-  number,
-  isCompleted,
-  onComplete,
-  onStartLesson,
-}) {
+function LessonPage({ setPage, number }) {
   const lesson = lessonData[number];
-
-  useEffect(() => {
-    if (lesson && !isCompleted) {
-      onStartLesson(number);
-    }
-  }, [lesson, number, isCompleted, onStartLesson]);
   if (!lesson) return null;
 
   const currentNumber = parseInt(number, 10);
@@ -6393,21 +6290,6 @@ function LessonPage({
   <InterviewQuestions questions={lesson.interview} />
 )}
 
-        <div className="lesson-completion">
-          <div>
-            <div className="section-label">LESSON PROGRESS</div>
-            <h3>{isCompleted ? "Lesson completed 🎉" : "Finished this lesson?"}</h3>
-            <p>{isCompleted ? "Your progress has been saved in this browser." : "Mark this lesson complete and continue to the next ITSM topic."}</p>
-          </div>
-          <button
-            className={`completion-btn ${isCompleted ? "completed" : ""}`}
-            onClick={() => onComplete(number)}
-            disabled={isCompleted}
-          >
-            {isCompleted ? "✓ Completed" : "Mark Lesson Complete ✓"}
-          </button>
-        </div>
-
         <div className="lesson-navigation">
 
   {previousTopic ? (
@@ -6461,10 +6343,164 @@ function LessonPage({
 
 function AboutPage() {
   return (
-    <main className="simple-page">
-      <div className="section-label">ABOUT SNOWHUB</div>
-      <h1>Learn ServiceNow with <span>SnowHub By Siva.</span></h1>
-      <p>SnowHub By Siva is a learning platform focused on practical ServiceNow tutorials, implementation examples and interview learning.</p>
+    <main className="about-page">
+
+      {/* ABOUT HERO */}
+      <section className="about-hero">
+
+        <div className="section-label">
+          ABOUT SNOWHUB BY SIVA
+        </div>
+
+        <h1>
+          Welcome to
+          <br />
+          <span>SnowHub By Siva.</span>
+        </h1>
+
+        <p>
+          SnowHub By Siva is a dedicated ServiceNow learning website
+          created to make learning simple, practical and easy to follow.
+        </p>
+
+      </section>
+
+
+      {/* ABOUT CONTENT */}
+      <section className="about-content">
+
+        <div className="about-card">
+          <div className="about-icon"> ?</div>
+
+          <div>
+            <h2>What is SnowHub By Siva?</h2>
+
+            <p>
+              SnowHub is a learning platform focused on ServiceNow.
+              It brings together concepts, practical examples,
+              practice questions and interview preparation in one place.
+            </p>
+          </div>
+        </div>
+
+
+        <div className="about-card">
+          <div className="about-icon">📚</div>
+
+          <div>
+            <h2>Learn ServiceNow</h2>
+
+            <p>
+              Explore ServiceNow concepts through simple explanations
+              and practical learning. SnowHub is designed for learners
+              who want to build their knowledge step by step.
+            </p>
+          </div>
+        </div>
+
+
+        <div className="about-card">
+          <div className="about-icon">🚀</div>
+
+          <div>
+            <h2>Our Goal</h2>
+
+            <p>
+              The goal of SnowHub is simple — make ServiceNow learning
+              easier, more practical and accessible for everyone.
+            </p>
+          </div>
+        </div>
+
+      </section>
+
+
+      {/* SNOWHUB BRAND */}
+      <section className="about-signature">
+
+        <div className="section-label">
+          SNOWHUB BY SIVA
+        </div>
+
+        <h2>Learn. Practice. Prepare.</h2>
+
+        <p>
+          Your journey to better ServiceNow knowledge starts here.
+        </p>
+
+
+        {/* WEBSITE */}
+        <div className="about-contact">
+
+          <div className="contact-section-title">
+            🌐 SnowHub By Siva Website
+          </div>
+
+          <a
+            href="/"
+            className="contact-item"
+          >
+            <div className="contact-icon">?</div>
+
+            <div>
+              <strong>SnowHub By Siva</strong>
+              <span>Explore ServiceNow learning resources</span>
+            </div>
+
+            <div className="contact-arrow">→</div>
+          </a>
+
+
+          {/* INSTAGRAM */}
+          <div className="contact-section-title">
+            📸 Follow SnowHub
+          </div>
+
+          <a
+            href="https://www.instagram.com/snowhub_by_siva?utm_source=qr&stkn=MTl3ZTVqYXd5YWR4bg=="
+            target="_blank"
+            rel="noreferrer"
+            className="contact-item"
+          >
+            <div className="contact-icon">📸</div>
+
+            <div>
+              <strong>Instagram</strong>
+              <span>@snowhub_by_siva</span>
+            </div>
+
+            <div className="contact-arrow">→</div>
+          </a>
+
+
+          {/* MOBILE */}
+          <div className="contact-section-title">
+            📱 Contact
+          </div>
+
+          <a
+            href="tel:+91"
+            className="contact-item"
+          >
+            <div className="contact-icon">📱</div>
+
+            <div>
+              <strong>Mobile</strong>
+              <span>+916304664130 </span>
+            </div>
+
+            <div className="contact-arrow">→</div>
+          </a>
+
+        </div>
+
+
+        <div className="about-tagline">
+          Learn. Practice. Prepare. Build.
+        </div>
+
+      </section>
+
     </main>
   );
 }
@@ -6731,12 +6767,15 @@ function InterviewQuestions({ questions }) {
 function GlobalSearch({ setPage, setShowSearch }) {
   const [searchTerm, setSearchTerm] = useState("");
 
+  const search = searchTerm.trim().toLowerCase();
+
   const results = itsmTopics.filter((topic) => {
-    const search = searchTerm.toLowerCase();
+    const title = topic[1].toLowerCase();
+    const description = topic[2].toLowerCase();
 
     return (
-      topic[1].toLowerCase().includes(search) ||
-      topic[2].toLowerCase().includes(search)
+      title.includes(search) ||
+      description.includes(search)
     );
   });
 
@@ -6745,28 +6784,50 @@ function GlobalSearch({ setPage, setShowSearch }) {
     setPage(`lesson-${number}`);
   };
 
+  const clearSearch = () => {
+    setSearchTerm("");
+  };
+
   return (
-    <div className="global-search-overlay" onClick={() => setShowSearch(false)}>
+    <div
+      className="global-search-overlay"
+      onClick={() => setShowSearch(false)}
+    >
       <div
         className="global-search-modal"
         onClick={(e) => e.stopPropagation()}
       >
+
+        {/* SEARCH HEADER */}
         <div className="global-search-header">
+
           <div>
-            <div className="section-label">SNOWHUB SEARCH</div>
-            <h2>Search <span>ServiceNow.</span></h2>
+            <div className="section-label">
+              SNOWHUB SEARCH
+            </div>
+
+            <h2>
+              Search <span>ServiceNow.</span>
+            </h2>
           </div>
 
           <button
             className="global-search-close"
             onClick={() => setShowSearch(false)}
+            aria-label="Close search"
           >
             ×
           </button>
+
         </div>
 
+
+        {/* SEARCH INPUT */}
         <div className="global-search-input">
-          <span>⌕</span>
+
+          <span className="global-search-icon">
+            🔍
+          </span>
 
           <input
             autoFocus
@@ -6775,42 +6836,311 @@ function GlobalSearch({ setPage, setShowSearch }) {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-        </div>
 
-        <div className="global-search-results">
-          {searchTerm === "" ? (
-            <div className="global-search-empty">
-              <div>🔎</div>
-              <p>Search for Incident, Change, SLA, Business Rules...</p>
-            </div>
-          ) : results.length === 0 ? (
-            <div className="global-search-empty">
-              <div>😕</div>
-              <p>No matching topics found.</p>
-            </div>
-          ) : (
-            results.map(([number, title, description]) => (
-              <button
-                className="global-search-result"
-                key={number}
-                onClick={() => openLesson(number)}
-              >
-                <span className="global-search-number">
-                  {number}
-                </span>
-
-                <span className="global-search-result-content">
-                  <strong>{title}</strong>
-                  <small>{description}</small>
-                </span>
-
-                <span>→</span>
-              </button>
-            ))
+          {searchTerm && (
+            <button
+              className="global-search-clear"
+              onClick={clearSearch}
+              aria-label="Clear search"
+            >
+              ×
+            </button>
           )}
+
         </div>
+
+
+        {/* SEARCH RESULTS */}
+        <div className="global-search-results">
+
+          {search === "" ? (
+
+            <div className="global-search-empty">
+
+              <div className="global-search-empty-icon">
+                🔍
+              </div>
+
+              <h3>What are you looking for?</h3>
+
+              <p>
+                Search for Incident, Problem, Change, SLA,
+                Business Rules or any ITSM topic.
+              </p>
+
+              <div className="search-suggestions">
+
+                <button onClick={() => setSearchTerm("Incident")}>
+                  Incident
+                </button>
+
+                <button onClick={() => setSearchTerm("Change")}>
+                  Change
+                </button>
+
+                <button onClick={() => setSearchTerm("SLA")}>
+                  SLA
+                </button>
+
+                <button onClick={() => setSearchTerm("Business Rules")}>
+                  Business Rules
+                </button>
+
+              </div>
+
+            </div>
+
+          ) : results.length === 0 ? (
+
+            <div className="global-search-empty">
+
+              <div className="global-search-empty-icon">
+                😕
+              </div>
+
+              <h3>No results found</h3>
+
+              <p>
+                We couldn't find an ITSM topic matching
+                "<strong>{searchTerm}</strong>".
+              </p>
+
+              <button
+                className="search-reset-btn"
+                onClick={clearSearch}
+              >
+                Clear Search
+              </button>
+
+            </div>
+
+          ) : (
+
+            <div className="search-results-list">
+
+              <div className="search-results-count">
+                {results.length} topic
+                {results.length !== 1 ? "s" : ""} found
+              </div>
+
+              {results.map(([number, title, description]) => (
+
+                <button
+                  className="global-search-result"
+                  key={number}
+                  onClick={() => openLesson(number)}
+                >
+
+                  <span className="global-search-number">
+                    {number}
+                  </span>
+
+                  <span className="global-search-result-content">
+
+                    <strong>{title}</strong>
+
+                    <small>{description}</small>
+
+                  </span>
+
+                  <span className="global-search-arrow">
+                    →
+                  </span>
+
+                </button>
+
+              ))}
+
+            </div>
+
+          )}
+
+        </div>
+
       </div>
     </div>
+  );
+}
+function Chatbot() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState([
+    {
+      sender: "bot",
+      text: "Hi! 👋 I'm SnowHub By SivaAssistant. Ask me anything about ServiceNow."
+    }
+  ]);
+
+  const getReply = (question) => {
+    const q = question.toLowerCase();
+
+    if (q.includes("incident")) {
+      return "Incident Management focuses on restoring normal service as quickly as possible after an interruption.";
+    }
+
+    if (q.includes("problem")) {
+      return "Problem Management focuses on identifying and removing the root cause of incidents.";
+    }
+
+    if (q.includes("change")) {
+      return "Change Management helps control changes while reducing risk and service disruption.";
+    }
+
+    if (q.includes("sla")) {
+      return "SLA means Service Level Agreement. It defines an agreed level of service and target completion time.";
+    }
+
+    if (q.includes("business rule")) {
+      return "A Business Rule is server-side logic that runs when records are inserted, updated, deleted, or queried.";
+    }
+
+    if (q.includes("client script")) {
+      return "A Client Script runs in the browser and is commonly used to control form behavior.";
+    }
+
+    if (q.includes("catalog")) {
+      return "Service Catalog allows users to request services and items through catalog items.";
+    }
+
+    if (q.includes("cmdb")) {
+      return "CMDB stores information about Configuration Items and their relationships.";
+    }
+
+    if (
+      q.includes("hi") ||
+      q.includes("hello") ||
+      q.includes("hey")
+    ) {
+      return "Hello! 👋 What ServiceNow topic would you like to learn?";
+    }
+
+    return "I can currently help with Incident, Problem, Change, SLA, Business Rules, Client Scripts, Service Catalog and CMDB. Try asking about one of these topics.";
+  };
+
+  const sendMessage = () => {
+    const text = message.trim();
+
+    if (!text) return;
+
+    setMessages((previous) => [
+      ...previous,
+      {
+        sender: "user",
+        text: text
+      },
+      {
+        sender: "bot",
+        text: getReply(text)
+      }
+    ]);
+
+    setMessage("");
+  };
+
+  return (
+    <>
+      {!isOpen && (
+        <button
+          className="chatbot-floating-btn"
+          onClick={() => setIsOpen(true)}
+          aria-label="Open SnowHub By Siva Assistant"
+        >
+          💬
+        </button>
+      )}
+
+      {isOpen && (
+        <div className="chatbot-window">
+
+          <div className="chatbot-header">
+
+            <div className="chatbot-title">
+              <div className="chatbot-avatar">
+                
+              </div>
+
+              <div>
+                <strong>SnowHub By Siva Assistant</strong>
+                <span>ServiceNow Learning</span>
+              </div>
+            </div>
+
+            <button
+              className="chatbot-close"
+              onClick={() => setIsOpen(false)}
+            >
+              ×
+            </button>
+
+          </div>
+
+
+          <div className="chatbot-messages">
+
+            {messages.map((item, index) => (
+              <div
+                key={index}
+                className={`chat-message ${item.sender}`}
+              >
+                {item.text}
+              </div>
+            ))}
+
+          </div>
+
+
+          <div className="chatbot-suggestions">
+
+            <button
+              onClick={() =>
+                setMessage("What is Incident Management?")
+              }
+            >
+              Incident
+            </button>
+
+            <button
+              onClick={() =>
+                setMessage("What is a Business Rule?")
+              }
+            >
+              Business Rule
+            </button>
+
+            <button
+              onClick={() =>
+                setMessage("What is SLA?")
+              }
+            >
+              SLA
+            </button>
+
+          </div>
+
+
+          <div className="chatbot-input">
+
+            <input
+              type="text"
+              placeholder="Ask a ServiceNow question..."
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  sendMessage();
+                }
+              }}
+            />
+
+            <button onClick={sendMessage}>
+              ➤
+            </button>
+
+          </div>
+
+        </div>
+      )}
+    </>
   );
 }
 /* =========================================================
@@ -6818,118 +7148,38 @@ function GlobalSearch({ setPage, setShowSearch }) {
 ========================================================= */
 
 function App() {
-  const [page, setPage] = useState("home");
+  const getPageFromPath = () => {
+    const path = window.location.pathname.replace(/^\/+|\/+$/g, "");
+
+    return path || "home";
+  };
+
+  const [page, setPage] = useState(getPageFromPath);
   const [showSearch, setShowSearch] = useState(false);
 
-  const [completedTopics, setCompletedTopics] = useState(() => {
-    try {
-      const saved = localStorage.getItem("snowhub_itsm_progress");
-      return new Set(saved ? JSON.parse(saved) : []);
-    } catch {
-      return new Set();
-    }
-  });
-  const [completedPracticeTopics, setCompletedPracticeTopics] =
-  useState(() => {
-    try {
-      const saved = localStorage.getItem(
-        "snowhub_itsm_practice_progress"
-      );
-      return new Set(saved ? JSON.parse(saved) : []);
-    } catch {
-      return new Set();
-    }
-  });
+  useEffect(() => {
+    const handlePopState = () => {
+      setPage(getPageFromPath());
+    };
 
-const [completedInterviewTopics, setCompletedInterviewTopics] =
-  useState(() => {
-    try {
-      const saved = localStorage.getItem(
-        "snowhub_itsm_interview_progress"
-      );
-      return new Set(saved ? JSON.parse(saved) : []);
-    } catch {
-      return new Set();
-    }
-  });
-  const [inProgressTopics, setInProgressTopics] = useState(() => {
-  try {
-    const saved = localStorage.getItem("snowhub_itsm_in_progress");
-    return new Set(saved ? JSON.parse(saved) : []);
-  } catch {
-    return new Set();
-  }
-});
+    window.addEventListener("popstate", handlePopState);
 
- const handleCompleteLesson = (number) => {
-  setCompletedTopics((previous) => {
-    const next = new Set(previous);
-    next.add(number);
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, []);
 
-    localStorage.setItem(
-      "snowhub_itsm_progress",
-      JSON.stringify([...next])
-    );
+  const navigate = (nextPage) => {
+    const nextPath = nextPage === "home" ? "/" : `/${nextPage}`;
 
-    return next;
-  });
+    window.history.pushState({}, "", nextPath);
+    setPage(nextPage);
 
-  setInProgressTopics((previous) => {
-    const next = new Set(previous);
-    next.delete(number);
-
-    localStorage.setItem(
-      "snowhub_itsm_in_progress",
-      JSON.stringify([...next])
-    );
-
-    return next;
-  });
-};
-const handleCompletePractice = (topic) => {
-  setCompletedPracticeTopics((previous) => {
-    const next = new Set(previous);
-    next.add(topic);
-
-    localStorage.setItem(
-      "snowhub_itsm_practice_progress",
-      JSON.stringify([...next])
-    );
-
-    return next;
-  });
-};
-
-const handleCompleteInterview = (topic) => {
-  setCompletedInterviewTopics((previous) => {
-    const next = new Set(previous);
-    next.add(topic);
-
-    localStorage.setItem(
-      "snowhub_itsm_interview_progress",
-      JSON.stringify([...next])
-    );
-
-    return next;
-  });
-};
-  const handleStartLesson = useCallback((number) => {
-  setInProgressTopics((previous) => {
-    if (previous.has(number)) {
-      return previous;
-    }
-
-    const next = new Set(previous);
-    next.add(number);
-
-    localStorage.setItem(
-      "snowhub_itsm_in_progress",
-      JSON.stringify([...next])
-    );
-
-    return next;
-  });
-}, []);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   const lessonPages = {
     "lesson-01": "01",
@@ -6950,59 +7200,44 @@ const handleCompleteInterview = (topic) => {
     <div className="snowhub">
       <Navbar
   page={page}
-  setPage={setPage}
+  setPage={navigate}
   setShowSearch={setShowSearch}
 />
 {showSearch && (
   <GlobalSearch
-    setPage={setPage}
+    setPage={navigate}
     setShowSearch={setShowSearch}
   />
 )}
-      {page === "home" && <HomePage setPage={setPage} />}
-      {page === "courses" && <CoursesPage setPage={setPage} />}
-      {page === "itsm" && (
-        
-  <ITSMPage
-    setPage={setPage}
-    completedTopics={completedTopics}
-    inProgressTopics={inProgressTopics}
-    onStartLesson={handleStartLesson}
-     completedPracticeTopics={completedPracticeTopics}
-  completedInterviewTopics={completedInterviewTopics}
-  />
-)}
+      {page === "home" && <HomePage setPage={navigate} />}
+{page === "courses" && <CoursesPage setPage={navigate} />}
+{page === "itsm" && <ITSMPage setPage={navigate} />}
       {lessonPages[page] && (
         <LessonPage
-          setPage={setPage}
-          number={lessonPages[page]}
-          isCompleted={completedTopics.has(lessonPages[page])}
-          onComplete={handleCompleteLesson}
-          onStartLesson={handleStartLesson}
-        />
+  setPage={navigate}
+  number={lessonPages[page]}
+/>
       )}
       {page === "practice" && (
-  <PracticeHub setPage={setPage} />
+  <PracticeHub setPage={navigate} />
 )}
 {page === "interview" && (
-  <InterviewHub setPage={setPage} />
+  <InterviewHub setPage={navigate} />
 )}
 
 {page.startsWith("interview-") &&
   page !== "interview" && (
     <InterviewPrep
-  setPage={setPage}
+  setPage={navigate}
   topic={page.replace("interview-", "")}
-  onCompleteInterview={handleCompleteInterview}
 />
   )}
 
 {page.startsWith("practice-") &&
   page !== "practice" && (
-   <PracticeQuiz
-  setPage={setPage}
+  <PracticeQuiz
+  setPage={navigate}
   topic={page.replace("practice-", "")}
-  onCompletePractice={handleCompletePractice}
 />
   )}
    
@@ -7058,9 +7293,13 @@ const handleCompleteInterview = (topic) => {
 
       <div className="footer-bottom">
         <span>© 2026 SnowHub By Siva</span>
-        <span>Made for ServiceNow Learners ❄️</span>
+        <span>Made for ServiceNow Learners </span>
       </div>
     </footer>
+
+<Chatbot />
+
+
     </div>
   );
 }
