@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { supabase } from "./supabaseClient";
+import ReactMarkdown from "react-markdown";
 import "./App.css";
 
 /* =========================================================
@@ -3529,7 +3531,7 @@ while (gr.next()) {
             </h2>
 
             <p>
-              Real feedback from people exploring ServiceNow with SnowHub.
+              Real feedback from people exploring ServiceNow with SnowHub By Siva.
             </p>
           </div>
 
@@ -3621,14 +3623,14 @@ while (gr.next()) {
 
       <p>
         Found something useful? Have a suggestion or noticed something
-        we can improve? Share your feedback and help us make SnowHub better.
+        we can improve? Share your feedback and help us make SnowHub By Siva better.
       </p>
     </div>
 
     <button
       className="feedback-btn"
       onClick={() =>
-        window.open("YOUR_GOOGLE_FORM_LINK", "_blank")
+        window.open("https://docs.google.com/forms/d/e/1FAIpQLSesHo4j9PA_1--XbikXQg9sA9eHA5HgEEYPJqhdD3ws8EVTpg/viewform?usp=publish-editor", "_blank")
       }
     >
       Give Feedback →
@@ -3643,37 +3645,294 @@ while (gr.next()) {
 /* =========================================================
    COURSES
 ========================================================= */
+/* =========================================================
+   COURSES PAGE
+========================================================= */
 
 function CoursesPage({ setPage }) {
   return (
     <main className="courses-page">
       <section className="courses">
-        <div className="section-label">SNOWHUB LEARNING</div>
-        <h1>Explore Our <span>Courses.</span></h1>
-        <p className="section-subtitle">Learn ServiceNow from fundamentals to advanced concepts through practical examples and real-world implementation.</p>
+
+        <div className="section-label">
+          SNOWHUB  BY SIVA LEARNING
+        </div>
+
+        <h1>
+          Explore Our <span>Courses.</span>
+        </h1>
+
+        <p className="section-subtitle">
+          Learn ServiceNow from fundamentals to advanced concepts
+          through practical examples and real-world implementation.
+        </p>
+
 
         <div className="course-grid">
-          {courses.map((course) => (
-            <article className="course-card" key={course.title}>
-              <div className={`course-icon ${course.color}`}>{course.icon}</div>
-              <h3>{course.title}</h3>
-              <p>{course.description}</p>
-              <div className="course-topics">{course.topics} Topics</div>
-              <button onClick={() => course.title === "ITSM" ? setPage("itsm") : alert(`${course.title} course will be added next.`)}>Start Learning →</button>
-            </article>
-          ))}
+
+
+          {/* =================================================
+             TOPIC 01 — CLOUD FUNDAMENTALS
+          ================================================= */}
+
+          <article className="course-card">
+
+            <div className="course-card-icon">
+              ☁️
+            </div>
+
+            <div className="course-card-content">
+
+              <div className="section-label">
+                TOPIC 01
+              </div>
+
+              <h3>
+                Cloud Fundamentals
+              </h3>
+
+              <p>
+                Understand cloud computing, traditional infrastructure,
+                cloud models, service models and how cloud concepts
+                relate to ServiceNow.
+              </p>
+
+              <button
+                onClick={() => setPage("cloud-fundamentals")}
+              >
+                Start Learning →
+              </button>
+
+            </div>
+
+          </article>
+
+
+          {/* =================================================
+             TOPIC 02 — SERVICENOW FUNDAMENTALS
+          ================================================= */}
+
+          <article className="course-card">
+
+            <div className="course-card-icon">
+              ⚙️
+            </div>
+
+            <div className="course-card-content">
+
+              <div className="section-label">
+                TOPIC 02
+              </div>
+
+              <h3>
+                ServiceNow Fundamentals
+              </h3>
+
+              <p>
+                Learn the ServiceNow platform, instances, tables,
+                records, forms, lists, users, roles and the basics
+                of ServiceNow development.
+              </p>
+
+              <button
+                onClick={() =>
+                  alert("ServiceNow Fundamentals will be added next.")
+                }
+              >
+                Start Learning →
+              </button>
+
+            </div>
+
+          </article>
+
+
+          {/* =================================================
+             TOPIC 03 — ITSM
+          ================================================= */}
+
+          <article className="course-card">
+
+            <div className="course-card-icon">
+              🛠️
+            </div>
+
+            <div className="course-card-content">
+
+              <div className="section-label">
+                TOPIC 03
+              </div>
+
+              <h3>
+                IT Service Management
+              </h3>
+
+              <p>
+                Learn ServiceNow ITSM concepts including Incident,
+                Problem, Change, Knowledge, Service Catalog, SLA,
+                Business Rules and more.
+              </p>
+
+              <button
+                onClick={() => setPage("itsm")}
+              >
+                Start Learning →
+              </button>
+
+            </div>
+
+          </article>
+
+
+          {/* =================================================
+             TOPIC 04 — SCRIPTING
+          ================================================= */}
+
+          <article className="course-card">
+
+            <div className="course-card-icon">
+              💻
+            </div>
+
+            <div className="course-card-content">
+
+              <div className="section-label">
+                TOPIC 04
+              </div>
+
+              <h3>
+                ServiceNow Scripting
+              </h3>
+
+              <p>
+                Learn GlideRecord, Business Rules, Client Scripts,
+                Script Includes, GlideAjax and practical
+                ServiceNow scripting concepts.
+              </p>
+
+              <button
+                onClick={() =>
+                  alert("ServiceNow Scripting will be added next.")
+                }
+              >
+                Coming Soon →
+              </button>
+
+            </div>
+
+          </article>
+
+
+          {/* =================================================
+             TOPIC 05 — INTEGRATIONS
+          ================================================= */}
+
+          <article className="course-card">
+
+            <div className="course-card-icon">
+              🔗
+            </div>
+
+            <div className="course-card-content">
+
+              <div className="section-label">
+                TOPIC 05
+              </div>
+
+              <h3>
+                ServiceNow Integrations
+              </h3>
+
+              <p>
+                Understand REST APIs, IntegrationHub, MID Server,
+                authentication and real-world ServiceNow
+                integration scenarios.
+              </p>
+
+              <button
+                onClick={() =>
+                  alert("ServiceNow Integrations will be added next.")
+                }
+              >
+                Coming Soon →
+              </button>
+
+            </div>
+
+          </article>
+
+
+          {/* =================================================
+             TOPIC 06 — CMDB & DISCOVERY
+          ================================================= */}
+
+          <article className="course-card">
+
+            <div className="course-card-icon">
+              🗄️
+            </div>
+
+            <div className="course-card-content">
+
+              <div className="section-label">
+                TOPIC 06
+              </div>
+
+              <h3>
+                CMDB & Discovery
+              </h3>
+
+              <p>
+                Learn CMDB fundamentals, CIs, CSDM, Discovery,
+                Identification and Reconciliation Engine and
+                practical CMDB concepts.
+              </p>
+
+              <button
+                onClick={() =>
+                  alert("CMDB & Discovery will be added next.")
+                }
+              >
+                Coming Soon →
+              </button>
+
+            </div>
+
+          </article>
+
         </div>
 
+
+        {/* =================================================
+           BOTTOM
+        ================================================= */}
+
         <div className="courses-bottom">
-          <div><strong>Free Learning</strong><span>No login required for the initial version.</span></div>
-          <button className="back-home-btn" onClick={() => setPage("home")}>← Back to Home</button>
+
+          <div>
+            <strong>
+              Free Learning
+            </strong>
+
+            <span>
+              No login required for the initial version.
+            </span>
+          </div>
+
+
+          <button
+            className="back-home-btn"
+            onClick={() => setPage("home")}
+          >
+            ← Back to Home
+          </button>
+
         </div>
+
       </section>
     </main>
   );
 }
-
-
 /* =========================================================
    ITSM COURSE PAGE
 ========================================================= */
@@ -3762,9 +4021,9 @@ function ITSMPage({ setPage }) {
                 <p>{description}</p>
   
               <div className="topic-actions">
-  <button onClick={() => setPage(`lesson-${number}`)}>
-    Learn Topic →
-  </button>
+  <button onClick={() => setPage(`itsm-${number}`)}>
+  Learn Topic →
+</button>
 </div>
               </div>
             </article>
@@ -6295,7 +6554,7 @@ function LessonPage({ setPage, number }) {
   {previousTopic ? (
     <button
       className="lesson-nav-btn previous"
-      onClick={() => setPage(`lesson-${previousNumber}`)}
+      onClick={() => setPage(`itsm-${previousNumber}`)}
     >
       <span>←</span>
       <div>
@@ -6317,7 +6576,7 @@ function LessonPage({ setPage, number }) {
   {nextTopic ? (
     <button
       className="lesson-nav-btn next"
-      onClick={() => setPage(`lesson-${nextNumber}`)}
+      onClick={() => setPage(`itsm-${nextNumber}`)}
     >
       <div>
         <small>NEXT TOPIC</small>
@@ -6392,7 +6651,7 @@ function AboutPage() {
 
             <p>
               Explore ServiceNow concepts through simple explanations
-              and practical learning. SnowHub is designed for learners
+              and practical learning. SnowHub By Siva  is designed for learners
               who want to build their knowledge step by step.
             </p>
           </div>
@@ -6406,7 +6665,7 @@ function AboutPage() {
             <h2>Our Goal</h2>
 
             <p>
-              The goal of SnowHub is simple — make ServiceNow learning
+              The goal of SnowHub  By Sivais simple — make ServiceNow learning
               easier, more practical and accessible for everyone.
             </p>
           </div>
@@ -6453,7 +6712,7 @@ function AboutPage() {
 
           {/* INSTAGRAM */}
           <div className="contact-section-title">
-            📸 Follow SnowHub
+            📸 Follow SnowHub By Siva
           </div>
 
           <a
@@ -6803,7 +7062,7 @@ function GlobalSearch({ setPage, setShowSearch }) {
 
           <div>
             <div className="section-label">
-              SNOWHUB SEARCH
+              SNOWHUB BY SIVA SEARCH
             </div>
 
             <h2>
@@ -6967,7 +7226,7 @@ function Chatbot() {
   const [messages, setMessages] = useState([
     {
       sender: "bot",
-      text: "Hi! 👋 I'm SnowHub By SivaAssistant. Ask me anything about ServiceNow."
+      text: "Hi! 👋 I'm SnowHub By Siva Assistant. Ask me anything about ServiceNow."
     }
   ]);
 
@@ -7143,12 +7402,1242 @@ function Chatbot() {
     </>
   );
 }
+function createSectionId(text) {
+  return text
+    .replace(/^\d+\.\s*/, "")
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+const cloudSectionVisuals = {
+ "What is Cloud Computing?": {
+  icon: "☁️",
+  type: "cloud",
+  items: ["Servers", "Storage", "Databases", "Applications"],
+  visualTitle: "Cloud Computing Resources",
+  visualDescription:
+    "Cloud computing provides computing resources over a network instead of requiring organizations to own all the infrastructure.",
+},
+
+ "Before Cloud — Traditional / On-Premises IT": {
+  icon: "🖥️",
+  type: "servers",
+  items: ["Company", "Physical Servers", "Storage", "Network"],
+  visualTitle: "Traditional On-Premises Environment",
+  visualDescription:
+    "Organizations owned and maintained their physical infrastructure inside their own environment.",
+},
+
+"Problems with Traditional Infrastructure": {
+  icon: "⚠️",
+  type: "problems",
+  items: ["High Cost", "Maintenance", "Scaling", "Downtime"],
+  visualTitle: "Traditional IT Challenges",
+  visualDescription:
+    "Managing physical infrastructure can introduce cost, maintenance, scaling and availability challenges.",
+},
+"How Cloud Changed IT": {
+  icon: "🔄",
+  type: "change",
+  items: ["Traditional IT", "Cloud", "On-Demand Resources"],
+  visualTitle: "From Traditional IT to Cloud",
+  visualDescription:
+    "Cloud computing changed how organizations obtain, scale and manage computing resources.",
+},
+
+ "Key Characteristics of Cloud": {
+  icon: "⚡",
+  type: "characteristics",
+  items: ["On-Demand", "Scalable", "Accessible", "Measured"],
+  visualTitle: "Key Cloud Characteristics",
+  visualDescription:
+    "Cloud environments provide resources when needed, support scaling, enable access over networks and allow usage to be measured.",
+},
+
+ "Benefits of Cloud Computing": {
+  icon: "🚀",
+  type: "benefits",
+  items: ["Cost", "Speed", "Scalability", "Flexibility"],
+  visualTitle: "Why Organizations Use Cloud",
+  visualDescription:
+    "Cloud computing can help organizations reduce infrastructure overhead, access resources quickly and scale according to demand.",
+},
+
+"Types of Cloud": {
+  icon: "☁️",
+  type: "types",
+  items: ["Public Cloud", "Private Cloud", "Hybrid Cloud"],
+  visualTitle: "Types of Cloud Deployment",
+  visualDescription:
+    "Organizations can choose different cloud deployment approaches based on ownership, control, security and business requirements.",
+},
+
+ "Cloud Service Models": {
+  icon: "🧱",
+  type: "models",
+  items: ["IaaS", "PaaS", "SaaS"],
+  visualTitle: "Cloud Service Models",
+  visualDescription:
+    "Cloud service models describe how much of the underlying infrastructure and platform is managed by the cloud provider.",
+},
+
+  "On-Premises vs Cloud": {
+  icon: "⚖️",
+  type: "compare",
+  items: ["On-Premises", "Cloud"],
+  visualTitle: "On-Premises vs Cloud",
+  visualDescription:
+    "The main difference is where infrastructure is hosted and who is responsible for managing it.",
+},
+
+ "Cloud and ServiceNow — How They Relate": {
+  icon: "🔗",
+  type: "servicenow",
+  items: ["Cloud", "Platform", "ServiceNow"],
+  visualTitle: "Cloud + ServiceNow",
+  visualDescription:
+    "ServiceNow is a cloud-based platform that organizations use to manage digital workflows, services and IT operations.",
+},
+
+ "What You Should Know Before Learning ServiceNow": {
+  icon: "🧭",
+  type: "roadmap",
+  items: ["Cloud Basics", "ServiceNow", "ITSM"],
+  visualTitle: "Your Learning Foundation",
+  visualDescription:
+    "Understanding basic cloud concepts gives you useful context before starting your ServiceNow learning journey.",
+},
+
+  "Summary": {
+  icon: "🎯",
+  type: "summary",
+  items: ["Understand", "Connect", "Apply"],
+  visualTitle: "Cloud Fundamentals — Key Takeaways",
+  visualDescription:
+    "You now have the foundation needed to understand cloud computing and how it connects with ServiceNow.",
+},
+};
+function CloudSectionVisual({ visual }) {
+  if (!visual) return null;
+
+  const type = visual.type;
+
+  return (
+    <div className={`cloud-section-visual visual-${type}`}>
+
+      <div className="cloud-visual-header">
+       
+
+        <div>
+          <span>SNOWHUB BY SIVA VISUAL</span>
+
+          {visual.visualTitle && (
+            <h4>{visual.visualTitle}</h4>
+          )}
+        </div>
+      </div>
+
+      {visual.visualDescription && (
+        <p className="cloud-visual-description">
+          {visual.visualDescription}
+        </p>
+      )}
+
+
+      {/* =========================================
+          SECTION 1 — CLOUD RESOURCES
+      ========================================= */}
+
+      {type === "cloud" && (
+        <div className="cloud-diagram cloud-resources-diagram">
+
+          <div className="cloud-main-node">
+            ☁️
+            <strong>Cloud</strong>
+            <small>Computing Resources</small>
+          </div>
+
+          <div className="cloud-branches">
+
+            <div className="cloud-diagram-node">
+              🖥️
+              <strong>Servers</strong>
+            </div>
+
+            <div className="cloud-diagram-node">
+              💾
+              <strong>Storage</strong>
+            </div>
+
+            <div className="cloud-diagram-node">
+              🗄️
+              <strong>Databases</strong>
+            </div>
+
+            <div className="cloud-diagram-node">
+              📱
+              <strong>Applications</strong>
+            </div>
+
+          </div>
+
+        </div>
+      )}
+
+
+      {/* =========================================
+          SECTION 2 — ON PREMISES
+      ========================================= */}
+
+      {type === "servers" && (
+        <div className="cloud-diagram onprem-diagram">
+
+          <div className="onprem-company">
+            🏢
+            <strong>Company</strong>
+          </div>
+
+          <div className="diagram-line">
+            ↓
+          </div>
+
+          <div className="onprem-resources">
+
+            <div>
+              🖥️
+              <strong>Physical Servers</strong>
+            </div>
+
+            <div>
+              💾
+              <strong>Storage</strong>
+            </div>
+
+            <div>
+              🌐
+              <strong>Network</strong>
+            </div>
+
+          </div>
+
+        </div>
+      )}
+
+
+      {/* =========================================
+          SECTION 3 — PROBLEMS
+      ========================================= */}
+
+      {type === "problems" && (
+        <div className="problem-diagram">
+
+          <div className="problem-center">
+            ⚠️
+            <strong>Traditional IT</strong>
+          </div>
+
+          <div className="problem-grid">
+
+            <div>
+              💰
+              <strong>High Cost</strong>
+            </div>
+
+            <div>
+              🔧
+              <strong>Maintenance</strong>
+            </div>
+
+            <div>
+              📈
+              <strong>Scaling</strong>
+            </div>
+
+            <div>
+              ⏱️
+              <strong>Downtime</strong>
+            </div>
+
+          </div>
+
+        </div>
+      )}
+
+
+      {/* =========================================
+          SECTION 4 — CLOUD CHANGE
+      ========================================= */}
+
+      {type === "change" && (
+        <div className="change-diagram">
+
+          <div className="change-node">
+            🖥️
+            <strong>Traditional IT</strong>
+          </div>
+
+          <div className="change-arrow">
+            →
+          </div>
+
+          <div className="change-node cloud-highlight">
+            ☁️
+            <strong>Cloud</strong>
+          </div>
+
+          <div className="change-arrow">
+            →
+          </div>
+
+          <div className="change-node">
+            ⚡
+            <strong>On-Demand</strong>
+          </div>
+
+        </div>
+      )}
+
+
+      {/* =========================================
+          SECTION 5 — CHARACTERISTICS
+      ========================================= */}
+
+      {type === "characteristics" && (
+        <div className="characteristics-diagram">
+
+          <div className="characteristic-card">
+            ⚡
+            <strong>On-Demand</strong>
+            <small>Use when needed</small>
+          </div>
+
+          <div className="characteristic-card">
+            📈
+            <strong>Scalable</strong>
+            <small>Grow when required</small>
+          </div>
+
+          <div className="characteristic-card">
+            🌐
+            <strong>Accessible</strong>
+            <small>Access over network</small>
+          </div>
+
+          <div className="characteristic-card">
+            📊
+            <strong>Measured</strong>
+            <small>Track usage</small>
+          </div>
+
+        </div>
+      )}
+
+
+      {/* =========================================
+          SECTION 6 — BENEFITS
+      ========================================= */}
+
+      {type === "benefits" && (
+        <div className="benefits-diagram">
+
+          <div className="benefits-cloud">
+            ☁️
+            <strong>Cloud</strong>
+          </div>
+
+          <div className="benefits-grid">
+
+            <div className="benefit-card">
+              💰
+              <strong>Cost Efficiency</strong>
+              <small>Reduce infrastructure overhead</small>
+            </div>
+
+            <div className="benefit-card">
+              ⚡
+              <strong>Faster Access</strong>
+              <small>Get resources quickly</small>
+            </div>
+
+            <div className="benefit-card">
+              📈
+              <strong>Scalability</strong>
+              <small>Scale with demand</small>
+            </div>
+
+            <div className="benefit-card">
+              🔄
+              <strong>Flexibility</strong>
+              <small>Adapt to changing needs</small>
+            </div>
+
+          </div>
+
+        </div>
+      )}
+
+
+      {/* =========================================
+          SECTION 7 — TYPES OF CLOUD
+      ========================================= */}
+
+      {type === "types" && (
+        <div className="cloud-types-diagram">
+
+          <div className="cloud-type-card public-cloud">
+            <div className="cloud-type-icon">
+              🌐
+            </div>
+
+            <h4>Public Cloud</h4>
+
+            <p>
+              Cloud infrastructure shared among
+              multiple customers.
+            </p>
+
+            <span>
+              Shared Infrastructure
+            </span>
+          </div>
+
+
+          <div className="cloud-type-card private-cloud">
+            <div className="cloud-type-icon">
+              🏢
+            </div>
+
+            <h4>Private Cloud</h4>
+
+            <p>
+              Cloud environment dedicated to
+              a single organization.
+            </p>
+
+            <span>
+              Dedicated Environment
+            </span>
+          </div>
+
+
+          <div className="cloud-type-card hybrid-cloud">
+            <div className="cloud-type-icon">
+              🔗
+            </div>
+
+            <h4>Hybrid Cloud</h4>
+
+            <p>
+              Combination of private and public
+              cloud environments.
+            </p>
+
+            <span>
+              Combined Approach
+            </span>
+          </div>
+
+        </div>
+      )}
+
+
+      {/* =========================================
+          SECTION 8 — SERVICE MODELS
+      ========================================= */}
+
+      {type === "models" && (
+        <div className="cloud-models-diagram">
+
+          <div className="model-card">
+
+            <div className="model-icon">
+              🖥️
+            </div>
+
+            <div className="model-badge">
+              IaaS
+            </div>
+
+            <h4>
+              Infrastructure as a Service
+            </h4>
+
+            <p>
+              Provides infrastructure resources
+              such as servers, storage and networking.
+            </p>
+
+            <div className="model-example">
+              Infrastructure
+            </div>
+
+          </div>
+
+
+          <div className="model-card model-highlight">
+
+            <div className="model-icon">
+              ⚙️
+            </div>
+
+            <div className="model-badge">
+              PaaS
+            </div>
+
+            <h4>
+              Platform as a Service
+            </h4>
+
+            <p>
+              Provides a platform where developers
+              can build and deploy applications.
+            </p>
+
+            <div className="model-example">
+              Development Platform
+            </div>
+
+          </div>
+
+
+          <div className="model-card">
+
+            <div className="model-icon">
+              📱
+            </div>
+
+            <div className="model-badge">
+              SaaS
+            </div>
+
+            <h4>
+              Software as a Service
+            </h4>
+
+            <p>
+              Provides ready-to-use software
+              applications over the internet.
+            </p>
+
+            <div className="model-example">
+              Ready-to-Use Software
+            </div>
+
+          </div>
+
+        </div>
+      )}
+
+
+      {/* =========================================
+          SECTION 9 — ON PREMISES VS CLOUD
+      ========================================= */}
+
+      {type === "compare" && (
+        <div className="cloud-compare-diagram">
+
+          <div className="compare-side">
+
+            <div className="compare-icon">
+              🏢
+            </div>
+
+            <h4>
+              On-Premises
+            </h4>
+
+            <div className="compare-item">
+              <span>🖥️</span>
+              <strong>Own Infrastructure</strong>
+            </div>
+
+            <div className="compare-item">
+              <span>🔧</span>
+              <strong>Organization Maintains</strong>
+            </div>
+
+            <div className="compare-item">
+              <span>💰</span>
+              <strong>Infrastructure Investment</strong>
+            </div>
+
+          </div>
+
+
+          <div className="compare-vs">
+            VS
+          </div>
+
+
+          <div className="compare-side compare-cloud">
+
+            <div className="compare-icon">
+              ☁️
+            </div>
+
+            <h4>
+              Cloud
+            </h4>
+
+            <div className="compare-item">
+              <span>☁️</span>
+              <strong>Cloud Infrastructure</strong>
+            </div>
+
+            <div className="compare-item">
+              <span>⚙️</span>
+              <strong>Provider Managed</strong>
+            </div>
+
+            <div className="compare-item">
+              <span>📈</span>
+              <strong>Scale as Needed</strong>
+            </div>
+
+          </div>
+
+        </div>
+      )}
+
+
+      {/* =========================================
+          SECTION 10 — CLOUD + SERVICENOW
+      ========================================= */}
+
+      {type === "servicenow" && (
+        <div className="servicenow-cloud-diagram">
+
+          <div className="sn-flow-card">
+
+            <div className="sn-flow-icon">
+              ☁️
+            </div>
+
+            <h4>
+              Cloud
+            </h4>
+
+            <p>
+              Provides the environment and
+              infrastructure for cloud-based services.
+            </p>
+
+          </div>
+
+
+          <div className="sn-flow-arrow">
+            →
+          </div>
+
+
+          <div className="sn-flow-card sn-main-card">
+
+            <div className="sn-flow-icon">
+              ⚙️
+            </div>
+
+            <h4>
+              ServiceNow
+            </h4>
+
+            <p>
+              A cloud-based platform for digital
+              workflows and service management.
+            </p>
+
+          </div>
+
+
+          <div className="sn-flow-arrow">
+            →
+          </div>
+
+
+          <div className="sn-flow-card">
+
+            <div className="sn-flow-icon">
+              🚀
+            </div>
+
+            <h4>
+              Business Workflows
+            </h4>
+
+            <p>
+              Organizations manage services and
+              workflows through the platform.
+            </p>
+
+          </div>
+
+        </div>
+      )}
+
+
+      {/* =========================================
+          SECTION 11 — LEARNING ROADMAP
+      ========================================= */}
+
+      {type === "roadmap" && (
+        <div className="learning-roadmap">
+
+          <div className="roadmap-step">
+
+            <div className="roadmap-number">
+              01
+            </div>
+
+            <div className="roadmap-icon">
+              ☁️
+            </div>
+
+            <h4>
+              Cloud Basics
+            </h4>
+
+            <p>
+              Understand basic cloud concepts
+              and terminology.
+            </p>
+
+          </div>
+
+
+          <div className="roadmap-line">
+            →
+          </div>
+
+
+          <div className="roadmap-step">
+
+            <div className="roadmap-number">
+              02
+            </div>
+
+            <div className="roadmap-icon">
+              ⚙️
+            </div>
+
+            <h4>
+              ServiceNow
+            </h4>
+
+            <p>
+              Learn the platform, interface,
+              tables and applications.
+            </p>
+
+          </div>
+
+
+          <div className="roadmap-line">
+            →
+          </div>
+
+
+          <div className="roadmap-step">
+
+            <div className="roadmap-number">
+              03
+            </div>
+
+            <div className="roadmap-icon">
+              🛠️
+            </div>
+
+            <h4>
+              ITSM
+            </h4>
+
+            <p>
+              Apply ServiceNow to IT service
+              management.
+            </p>
+
+          </div>
+
+        </div>
+      )}
+
+
+      {/* =========================================
+          SECTION 12 — SUMMARY
+      ========================================= */}
+
+      {type === "summary" && (
+        <div className="summary-diagram">
+
+          <div className="summary-card">
+
+            <div className="summary-icon">
+              🧠
+            </div>
+
+            <h4>
+              Understand
+            </h4>
+
+            <p>
+              Understand what cloud computing is
+              and why organizations use it.
+            </p>
+
+          </div>
+
+
+          <div className="summary-arrow">
+            →
+          </div>
+
+
+          <div className="summary-card">
+
+            <div className="summary-icon">
+              🔗
+            </div>
+
+            <h4>
+              Connect
+            </h4>
+
+            <p>
+              Connect cloud concepts with
+              ServiceNow and ITSM.
+            </p>
+
+          </div>
+
+
+          <div className="summary-arrow">
+            →
+          </div>
+
+
+          <div className="summary-card">
+
+            <div className="summary-icon">
+              🚀
+            </div>
+
+            <h4>
+              Apply
+            </h4>
+
+            <p>
+              Use this foundation as you continue
+              learning ServiceNow.
+            </p>
+
+          </div>
+
+        </div>
+      )}
+
+    </div>
+  );
+}
+
+
+        
+  
+ 
+function CloudFundamentalsPage({ setPage }) {
+  const [lesson, setLesson] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  const [currentSection, setCurrentSection] = useState(0);
+
+  const [feedbackOpen, setFeedbackOpen] = useState(false);
+  const [feedbackType, setFeedbackType] = useState("");
+  const [feedbackText, setFeedbackText] = useState("");
+  const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
+  const [feedbackLoading, setFeedbackLoading] = useState(false);
+
+  useEffect(() => {
+    const loadLesson = async () => {
+      const { data, error } = await supabase
+        .from("lessons")
+        .select("*")
+        .eq("lesson_number", 1)
+        .eq("published", true)
+        .single();
+
+      if (error) {
+        console.error("Cloud Fundamentals error:", error);
+        setError("Unable to load this lesson.");
+        setLoading(false);
+        return;
+      }
+
+      setLesson(data);
+      setLoading(false);
+    };
+
+    loadLesson();
+  }, []);
+
+  /*
+   * Convert the Markdown content into sections.
+   * Every ## heading becomes one section.
+   */
+  const sections = lesson
+    ? lesson.content
+        .split(/^##\s+/m)
+        .filter((section) => section.trim())
+        .map((section) => {
+          const lines = section.split("\n");
+
+          return {
+            heading: lines[0].trim(),
+            content: lines.slice(1).join("\n").trim(),
+          };
+        })
+    : [];
+
+  const totalSections = sections.length;
+
+  const activeSection = sections[currentSection];
+
+  const goToNext = () => {
+    if (currentSection < totalSections - 1) {
+      setCurrentSection((current) => current + 1);
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const goToPrevious = () => {
+    if (currentSection > 0) {
+      setCurrentSection((current) => current - 1);
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const submitFeedback = async () => {
+    if (!feedbackType) return;
+
+    setFeedbackLoading(true);
+
+    const { error } = await supabase
+      .from("course_feedback")
+      .insert([
+        {
+          course_name: "Cloud Fundamentals",
+          feedback_type: feedbackType,
+          feedback_text:
+            feedbackType === "dislike"
+              ? feedbackText.trim() || null
+              : null,
+        },
+      ]);
+
+    setFeedbackLoading(false);
+
+    if (error) {
+      console.error("Feedback submission error:", error);
+      return;
+    }
+
+    setFeedbackSubmitted(true);
+  };
+
+  if (loading) {
+    return (
+      <main className="lesson-page">
+        <button
+  className="back-to-courses"
+  onClick={() => setPage("courses")}
+>
+  ← Back to Courses
+</button>
+        <div className="lesson-loading">
+          <div className="section-label">SnowHub By Siva</div>
+          <h2>Loading course...</h2>
+          <p>Getting Cloud Fundamentals from SnowHub By Siva.</p>
+        </div>
+      </main>
+    );
+  }
+
+  if (error) {
+    return (
+      <main className="lesson-page">
+        <div className="lesson-loading">
+          <div className="section-label">SNOWHUB</div>
+          <h2>Something went wrong</h2>
+          <p>{error}</p>
+        </div>
+      </main>
+    );
+  }
+
+  if (!activeSection) {
+    return (
+      <main className="lesson-page">
+        <div className="lesson-loading">
+          <div className="section-label">SNOWHUB</div>
+          <h2>No course content found</h2>
+          <p>Please check the Cloud Fundamentals content in Supabase.</p>
+        </div>
+      </main>
+    );
+  }
+
+  const isFirstSection = currentSection === 0;
+  const isLastSection = currentSection === totalSections - 1;
+
+  return (
+    <main className="lesson-page">
+{/* Back to Main Courses */}
+    <button
+      className="back-to-courses"
+      onClick={() => setPage("courses")}
+    >
+      ← Back to Courses
+    </button>
+      {/* Course Header */}
+      <section className="lesson-hero">
+
+        <div className="section-label">
+          CLOUD FUNDAMENTALS
+        </div>
+
+        <h1>
+          {lesson.title}
+        </h1>
+
+        <p>
+          {lesson.description}
+        </p>
+
+      </section>
+
+      {/* Current Section */}
+      <section className="lesson-content-wrapper">
+
+        <article className="lesson-content-card">
+
+  <div className="course-section-label">
+    SECTION {currentSection + 1}
+  </div>
+
+  <div className="cloud-section-title-row">
+
+    <div className="cloud-section-icon">
+      {
+        cloudSectionVisuals[
+          activeSection.heading.replace(/^\d+\.\s*/, "")
+        ]?.icon || "☁️"
+      }
+    </div>
+
+    <h2 className="course-section-title">
+      {activeSection.heading.replace(/^\d+\.\s*/, "")}
+    </h2>
+
+  </div>
+
+  <CloudSectionVisual
+    visual={
+      cloudSectionVisuals[
+        activeSection.heading.replace(/^\d+\.\s*/, "")
+      ]
+    }
+  />
+
+  {(() => {
+  const parts = activeSection.content.split(
+    /###\s+SnowHub By Siva Takeaway/i
+  );
+
+  const normalContent = parts[0].trim();
+  const takeawayContent = parts[1]?.trim();
+
+  return (
+    <>
+      <ReactMarkdown>
+        {normalContent}
+      </ReactMarkdown>
+
+      {takeawayContent && (
+        <div className="snowhub-takeaway">
+          <div className="snowhub-takeaway-title">
+            💡 <span>SNOWHUB BY SIVA TAKEAWAY</span>
+          </div>
+
+          <div className="snowhub-takeaway-content">
+            <ReactMarkdown>
+              {takeawayContent}
+            </ReactMarkdown>
+          </div>
+        </div>
+      )}
+    </>
+  );
+})()}
+
+</article>
+
+      </section>
+
+      {/* Previous / Next Navigation */}
+      <div className="course-navigation-buttons">
+
+        {isFirstSection ? (
+          <div></div>
+        ) : (
+          <button
+            className="course-nav-button previous"
+            onClick={goToPrevious}
+          >
+            ← Previous
+          </button>
+        )}
+
+        {!isLastSection && (
+          <button
+            className="course-nav-button next"
+            onClick={goToNext}
+          >
+            Next →
+          </button>
+        )}
+
+      </div>
+
+      {/* Feedback only on final section */}
+      {isLastSection && (
+        <section className="course-feedback-section">
+
+          {!feedbackSubmitted ? (
+            <>
+              <div className="section-label">
+                YOUR FEEDBACK
+              </div>
+
+              <h2>
+                Did you like this course?
+              </h2>
+
+              <p>
+                Your feedback helps us improve SnowHub for future learners.
+              </p>
+
+              <div className="feedback-buttons">
+
+                <button
+                  className={`feedback-choice ${
+                    feedbackType === "like" ? "selected" : ""
+                  }`}
+                  onClick={() => {
+                    setFeedbackType("like");
+                    setFeedbackOpen(true);
+                  }}
+                >
+                  <span>👍</span>
+                  <strong>Like</strong>
+                </button>
+
+                <button
+                  className={`feedback-choice ${
+                    feedbackType === "dislike" ? "selected" : ""
+                  }`}
+                  onClick={() => {
+                    setFeedbackType("dislike");
+                    setFeedbackOpen(true);
+                  }}
+                >
+                  <span>👎</span>
+                  <strong>Dislike</strong>
+                </button>
+
+              </div>
+
+              {feedbackOpen && (
+                <div className="feedback-form">
+
+                  {feedbackType === "dislike" && (
+                    <>
+                      <h3>
+                        What could we improve?
+                      </h3>
+
+                      <p>
+                        Tell us what we can improve for future learners.
+                      </p>
+
+                      <textarea
+                        value={feedbackText}
+                        onChange={(e) =>
+                          setFeedbackText(e.target.value)
+                        }
+                        placeholder="Write your suggestion..."
+                        rows="5"
+                      />
+                    </>
+                  )}
+
+                  {feedbackType === "like" && (
+                    <p className="feedback-thanks">
+                      ❤️ Thanks for your feedback! We're glad you
+                      enjoyed the course.
+                    </p>
+                  )}
+
+                  <button
+                    className="feedback-submit"
+                    onClick={submitFeedback}
+                    disabled={feedbackLoading}
+                  >
+                    {feedbackLoading
+                      ? "Submitting..."
+                      : "Submit Feedback"}
+                  </button>
+
+                </div>
+              )}
+
+            </>
+          ) : (
+            <div className="feedback-success">
+
+              <div className="feedback-success-icon">
+                ✓
+              </div>
+
+              <h2>
+                Thank you! 🙌
+              </h2>
+
+              <p>
+                Your feedback will help us improve SnowHub.
+              </p>
+
+            </div>
+          )}
+
+        </section>
+      )}
+
+    </main>
+  );
+}
 /* =========================================================
    APP
 ========================================================= */
 
 function App() {
   const getPageFromPath = () => {
+      
     const path = window.location.pathname.replace(/^\/+|\/+$/g, "");
 
     return path || "home";
@@ -7156,7 +8645,8 @@ function App() {
 
   const [page, setPage] = useState(getPageFromPath);
   const [showSearch, setShowSearch] = useState(false);
-
+  // SUPABASE TEST — TOP LEVEL
+ 
   useEffect(() => {
     const handlePopState = () => {
       setPage(getPageFromPath());
@@ -7181,20 +8671,20 @@ function App() {
     });
   };
 
-  const lessonPages = {
-    "lesson-01": "01",
-    "lesson-02": "02",
-    "lesson-03": "03",
-    "lesson-04": "04",
-    "lesson-05": "05",
-    "lesson-06": "06",
-    "lesson-07": "07",
-    "lesson-08": "08",
-    "lesson-09": "09",
-    "lesson-10": "10",
-    "lesson-11": "11",
-    "lesson-12": "12",
-  };
+ const itsmLessonPages = {
+  "itsm-01": "01",
+  "itsm-02": "02",
+  "itsm-03": "03",
+  "itsm-04": "04",
+  "itsm-05": "05",
+  "itsm-06": "06",
+  "itsm-07": "07",
+  "itsm-08": "08",
+  "itsm-09": "09",
+  "itsm-10": "10",
+  "itsm-11": "11",
+  "itsm-12": "12",
+};
 
   return (
     <div className="snowhub">
@@ -7211,13 +8701,14 @@ function App() {
 )}
       {page === "home" && <HomePage setPage={navigate} />}
 {page === "courses" && <CoursesPage setPage={navigate} />}
+
 {page === "itsm" && <ITSMPage setPage={navigate} />}
-      {lessonPages[page] && (
-        <LessonPage
-  setPage={navigate}
-  number={lessonPages[page]}
-/>
-      )}
+{page === "cloud-fundamentals" && (
+  <CloudFundamentalsPage setPage={navigate} />
+)}
+      {itsmLessonPages[page] && (
+  <LessonPage setPage={navigate} number={itsmLessonPages[page]} />
+)}
       {page === "practice" && (
   <PracticeHub setPage={navigate} />
 )}
